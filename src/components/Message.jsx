@@ -93,7 +93,7 @@ const minusIcon=()=>{return(
 		<button className='voteButton' onClick={onMinus}> {minusIcon()} </button>
 		</div>
 		<div className='info'>
-		<img alt='avatar' className='avatar' src={'.'+imageUrl} />
+		<img alt='avatar' className='avatar' src={imageUrl} />
 		<div className='name'onClick={()=>onReply(author)}>{author}</div>
 		{ author===user.username && <div className='you'>you</div>}
 		<p className='time'>{time}</p>
