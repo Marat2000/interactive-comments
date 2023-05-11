@@ -1,9 +1,21 @@
 import React from 'react'
-const ReplyArea=({user, setComments , comments , item, setReplyClicked, replyText ,replyRef, setReplyText})=>{
+const ReplyArea=({
+user , 
+item , 
+comments ,
+setComments , 
+setReplyClicked , 
+replyText ,
+replyRef , 
+setReplyText})=>{
 
 let imageUrl=user.image.png
 
+
+
 const reply=()=>{
+
+	let arr = [...comments]
 	if(replyText){
 		let newReply={
 				"id": item.id+1,
@@ -12,16 +24,16 @@ const reply=()=>{
 			    "user":{...user} ,
 			    "replyingTo":item.user.username,
 			    "replies": [],
-			    "createdAt":"Now"
+			    "createdAt":"Now",
+			    "voteTime":0
 		}
 	
-	
-		replyText && comments.splice(item.id,0,newReply)
-		comments.forEach((e,i)=>e.id=i+1)
-		
+		replyText && arr.splice(item.id,0,newReply)
+		arr.forEach((e,i)=>e.id=i+1)
 		setReplyText('')
-		setComments([...comments])
+		setComments([...arr])
 		setReplyClicked(false)}}
+
 
 const textChange=(e)=>{
 setReplyText(e.target.value)

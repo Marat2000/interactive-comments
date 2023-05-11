@@ -25,6 +25,8 @@ const allComments = () => {
 		arr.push(e);
 		if (e.replies) arr.push(...e.replies);
 	});
+		
+	arr.forEach(e=>e.voteTime=0)
 	setComments([...arr]);
 };
 
@@ -36,6 +38,8 @@ React.useEffect(() => {
 React.useEffect(() => {
 	comments.forEach((e,i)=>e.id=i+1)
 }, [comments]);
+
+
 
 
   return (<>

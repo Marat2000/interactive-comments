@@ -2,14 +2,28 @@ import Delete from './Delete'
 import React from 'react'
 
 
-const Message=({item, text ,user, setText ,inputRef,comments,setComments,replyClicked,setReplyClicked , setReplyText , replyRef ,replyText, replyId , setReplyId })=>{
-
+const Message=({
+item ,
+text , 
+user ,
+setText , 
+inputRef ,
+comments ,
+setComments ,
+replyClicked ,
+setReplyClicked , 
+setReplyText , 
+replyRef ,
+replyText ,
+replyId , 
+setReplyId })=>{
 const [deleteClicked , setDeleteClicked]=React.useState(false)
 const [editClicked , setEditClicked]=React.useState(false)
 const [updateContent , setUpdateContent]=React.useState()
-const [voteTimes,setVoteTimes]=React.useState(0)
 const scoreRef=React.useRef(null)
 
+
+console.log( item.content.split('').splice(0,10).join('')+'::'+comments[item.id-1].score )
 
 let author=item.user.username
 let time=item.createdAt
@@ -56,25 +70,34 @@ const replyBtnClick=()=>{
 	setReplyId(item.id)
 }
 
-(function voteBtnColor(){
+function voteBtnColor(){
 	if(scoreRef.current){
-		if(voteTimes===0)
+		if(item.voteTime==0)
 		scoreRef.current.style.color='hsl(238, 30%, 72%)'
-		else if(voteTimes===1)
+		else if(item.voteTime==1)
 		scoreRef.current.style.color='var(--Blue)'
-		else if(voteTimes===-1)
-		scoreRef.current.style.color='var(--Red)'}})()
+		else if(item.voteTime==-1)
+		scoreRef.current.style.color='var(--Red)'}}
+
+
+React.useEffect(()=>{
+	voteBtnColor()
+
+},[item.voteTime])
 
 const onPlus=()=>{
-	if(voteTimes===0 || voteTimes===-1)
-	{item.score=item.score+1
-		setVoteTimes(voteTimes+1)}
-	
+	if(item.voteTime===0 || item.voteTime===-1)
+	{item.score++
+	item.voteTime++
+	setComments([...comments])}
 }
 const onMinus=()=>{
-	if(voteTimes===0 || voteTimes===1)
-	{item.score=item.score-1
-		setVoteTimes(voteTimes-1)}
+	if(item.voteTime===0 || item.voteTime===1)
+
+	{item.score--
+	item.voteTime--
+	setComments([...comments])
+	}
 }
 
 
@@ -89,7 +112,7 @@ const minusIcon=()=>{return(
 		<div  className={`message ${replyTo && ' replyedMessage'}`}>
 		<div className='vote'>
 		<button className='voteButton' onClick={onPlus}> {plusIcon()}  </button>
-		<p  ref={scoreRef}>{item.score}</p>
+		<p  ref={scoreRef}>{ item.score }</p>
 		<button className='voteButton' onClick={onMinus}> {minusIcon()} </button>
 		</div>
 		<div className='info'>

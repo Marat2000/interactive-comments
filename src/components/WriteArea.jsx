@@ -16,6 +16,7 @@ const send=()=>{
 		      "user":{...user} ,
 		      "replies": [],
 		      "createdAt":"Now",
+		      "voteTime":0
 		    }])
 	
 	setText('')
