@@ -1,32 +1,46 @@
 import Message from './components/Message'
 import WriteArea from './components/WriteArea'
 import ReplyArea from './components/ReplyArea'
-
 import data from './data.json'
 import React from 'react'
 
+export type comment = {
+	id: number;
+	content: string;
+	createdAt: string;
+	score: number;
+	user: {
+		image: {
+			png: string;
+			webp: string;
+		};
+		username: string;
+	};
+	replyingTo?: string;
+	voteTime?:number;
+	replies?:comment[];
+};
 
-function App() {
+const App:React.FC=()=> {
 
-const [comments, setComments]=React.useState( data.comments)
-const [replyText , setReplyText]=React.useState('')
-const [replyClicked, setReplyClicked]=React.useState(false)
-const [replyId, setReplyId]=React.useState(0)
-const [text,setText]=React.useState('')
+const [comments, setComments] = React.useState<comment[]>(data.comments);
+const [replyText, setReplyText] = React.useState<string>("");
+const [replyClicked, setReplyClicked] = React.useState<boolean>(false);
+const [replyId, setReplyId] = React.useState<number>(0);
+const [text, setText] = React.useState<string>("");
 
-const replyRef=React.useRef(null)
-const inputRef=React.useRef(null)
-const commRef=React.useRef(null)
-
+const replyRef = React.useRef<HTMLTextAreaElement>(null);
+const inputRef = React.useRef<HTMLTextAreaElement>(null);
+const commRef = React.useRef<HTMLDivElement>(null);
 
 const allComments = () => {
-	let arr = [];
+	let arr:comment[] = [];
 	data.comments.forEach((e) => {
 		arr.push(e);
 		if (e.replies) arr.push(...e.replies);
 	});
-		
-	arr.forEach(e=>e.voteTime=0)
+
+	arr.forEach((e) => (e.voteTime = 0));
 	setComments([...arr]);
 };
 
@@ -36,11 +50,8 @@ React.useEffect(() => {
 }, []);
 
 React.useEffect(() => {
-	comments.forEach((e,i)=>e.id=i+1)
+	comments.forEach((e, i) => (e.id = i + 1));
 }, [comments]);
-
-
-
 
   return (<>
 <div className='comments' ref={commRef}>
@@ -62,8 +73,7 @@ replyText={replyText}
 replyId={replyId}
 setReplyId={setReplyId}/>
 
-
-{replyId===user.id&&replyClicked && 
+{replyId===user.id && replyClicked && 
 	<ReplyArea 
 	replyRef={replyRef} 
 	replyText={replyText}  
@@ -73,8 +83,6 @@ setReplyId={setReplyId}/>
 	comments={comments} 
 	item={user} 
 	setReplyClicked={setReplyClicked}/>}
-
-
 </div>)})}
 </div>
 
@@ -88,6 +96,5 @@ setText={setText}
 commRef={commRef}
 />
 </>)}
-
 
 export default App;

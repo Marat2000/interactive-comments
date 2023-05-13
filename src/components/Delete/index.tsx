@@ -1,6 +1,19 @@
 import style from './Delete.module.css'
+import {comment} from '../../App'
 
-const Delete=({setDeleteClicked, comments , setComments, item})=>{
+type DeleteType={
+setDeleteClicked:React.Dispatch<React.SetStateAction<boolean>>;
+comments:comment[];
+setComments:React.Dispatch<React.SetStateAction<comment[]>>;
+item:comment;
+}
+
+const Delete:React.FC<DeleteType>=({
+setDeleteClicked,
+comments,
+setComments,
+item,
+})=>{
 
 const buttonClick=()=>{
 	setDeleteClicked(false)

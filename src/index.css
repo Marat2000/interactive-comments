@@ -41,6 +41,8 @@ body{
 	padding-right: 28px;
 }
 
+
+
 .replyedMessage{
 	margin-left:25px;
 }
@@ -109,6 +111,10 @@ body{
 
 .time,.text{
 	color:var(--Gray);
+}
+
+.time{
+	text-align: center;
 }
 
 .text{
@@ -221,6 +227,10 @@ body{
 	transition: .2s;
 }
 
+.deleteBtn,.editBtn{
+	font-size: 14px;
+}
+
 .replyBtn:hover,
 .deleteBtn:hover,
 .editBtn:hover{
@@ -238,6 +248,33 @@ body{
 	font-weight: 700;
 }
 
+.deleteEditIcons{
+display:flex ;
+ gap:15px ;
+ place-self:end;
+ margin-bottom:auto;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+  
+}
+
+::-webkit-scrollbar-thumb {
+border-radius: 8px;
+  background-color: var(--LightBlue);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--Blue);
+
+}
+
 
 /**************************************
 ***************************************
@@ -249,7 +286,9 @@ body{
 ***************************************
 ***************************************/
 
-@media(max-width:600px){
+
+
+@media(max-width:650px){
 
 
 
@@ -271,14 +310,13 @@ body{
 	grid-area: 1/1/1/3;
 }
 
-.deleteBtn, .editBtn{
-	font-size: 14px;
+.deleteEditIcons{
+	margin-bottom: 0;
 }
 
-
 }
 
-@media(max-width:440px){
+@media(max-width:450px){
 	*{
 	font-size: 14px;
 }
@@ -290,13 +328,14 @@ body{
 	width: 10px;
 }
 .vote{
-	width: 80px;
+	width: 76px;
 	height: 30px;
 }
 
-.voteButton *{
-	width:8px;
+.time{
+	font-size: 12px;
 }
+
 .vote *{
 	font-size: 12px;
 }
@@ -316,7 +355,7 @@ body{
 
 }
 
-@media(max-width:320px){
+@media(max-width:327px){
 *{
 	font-size: 10px;
 }
@@ -326,6 +365,10 @@ height: 16px;
 }
 .text{
 	line-height: 13px; 
+}
+
+.time{
+	font-size: 8px;
 }
 
 .deleteBtn img, .editBtn img{
